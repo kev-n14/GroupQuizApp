@@ -54,7 +54,7 @@ You can download the wireframes for this website from this link []().
 <details>
 <summary>ER Diagram</summary>
 
-![ER Diagram]()
+![ER Diagram](https://res.cloudinary.com/dlulkctls/image/upload/v1714994744/GroupQuiz/Er_diagram_hbb3jy.png)
 </details> 
 
 ---
