@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\v2\\Quiz\\Quiz\\Quiz.csproj",
+      "projectUniqueName": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\GroupProject\\Quiz\\Quiz.csproj",
       "projectName": "Quiz",
-      "projectPath": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\v2\\Quiz\\Quiz\\Quiz.csproj",
+      "projectPath": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\GroupProject\\Quiz\\Quiz.csproj",
       "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\v2\\Quiz\\Quiz\\obj\\",
+      "outputPath": "C:\\Users\\kevin\\Documents\\Courses\\FIT\\Software Development\\Project\\GroupProject\\Quiz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
