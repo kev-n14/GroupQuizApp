@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container vh-100 d-flex justify-content-center align-items-center ">
+    <div class="row">
+        <div class="col">
+            <div class="card text-center card-custom gradient-bg">
+                <div class="card-body text-white">
+                    <h2 class="card-title m-2 pt-5">Quiz Name</h2>
+                    <h3 class="card-text py-5 ">Test your knowledge! And Take The Quiz</h3>
+                    <a href="#" class="btn btn-primary p-2">Start Quiz</a>
+                    <a href="../Views/Home/Create.cshtml" class="btn btn-secondary p-2">Create a Quiz</a>
+                </div>
+            </div>
+        </div>
+    </div>
