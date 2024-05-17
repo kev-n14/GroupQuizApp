@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\kevin\\Documents\\GitHub\\GroupQuizApp\\Group_Quiz\\wwwroot\\images\\BrainBuster.png",
+      "PackagePath": "staticwebassets\\images\\BrainBuster.png"
+    },
+    {
       "Id": "C:\\Users\\kevin\\Documents\\GitHub\\GroupQuizApp\\Group_Quiz\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

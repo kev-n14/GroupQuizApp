@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5xmY0HfQxU11wr+Xa7aRoTiakcqk2WIwcA9mgSpVoXY=",
+  "Hash": "3pU7KPacrUY3CoFLo72dtXKLM5vHev0i2XofoehBO2c=",
   "Source": "Group_Quiz",
   "BasePath": "_content/Group_Quiz",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\kevin\\Documents\\GitHub\\GroupQuizApp\\Group_Quiz\\wwwroot\\images\\BrainBuster.png",
+      "SourceId": "Group_Quiz",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kevin\\Documents\\GitHub\\GroupQuizApp\\Group_Quiz\\wwwroot\\",
+      "BasePath": "_content/Group_Quiz",
+      "RelativePath": "images/BrainBuster.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\BrainBuster.png"
     },
     {
       "Identity": "C:\\Users\\kevin\\Documents\\GitHub\\GroupQuizApp\\Group_Quiz\\wwwroot\\js\\site.js",
