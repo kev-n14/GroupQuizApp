@@ -18,11 +18,34 @@ namespace Group_Quiz.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Create()
         {
+            // Logic to create a new quiz
+            return View();
+        }
+        public IActionResult Dashboard()
+        {
+            // Logic to display quiz questions
+            return View();
+        }
+        public IActionResult Edit()
+        {
+            // Logic to display quiz questions
+            return View();
+        }
+        public IActionResult Quiz()
+        {
+            // Logic to display quiz questions
+            return View();
+        }
+        public IActionResult Result()
+        {
+            // Logic to display quiz questions
             return View();
         }
 
+        
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
