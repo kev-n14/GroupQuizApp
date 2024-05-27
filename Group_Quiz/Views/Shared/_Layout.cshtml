@@ -14,29 +14,66 @@
         }
 
         .navbar-brand img {
-            margin-right: 0; /* Remove the right margin */
+            margin-right: 0; 
         }
    
         /*index page*/
         .gradient-bg {
-            background: linear-gradient(to top right, #CE93D8, #7B1FA2);
-            height: 100vh;
-            /* Ensure it covers the full viewport height */
             width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+            border: 1px solid #000;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to top right, #CE93D8, #7B1FA2);
+            color: #fff;
         }
-
-        .card-custom {
-            width: 24rem;
-            height: 24rem;
+        /*Dashboard page*/
+        .question-card-dash {
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
-        /*Create Page*/
+        /*Quiz Page*/
         .question-card {
-            width: 30rem;
-            height: 30rem;
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+            border: 1px solid #000;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         }
 
-        .bg-option {
-            background-color: #CE93D8;
+        .option {
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #f1f1f1;
+        }
+        /*All pages*/
+        .btn-default {
+            background: rgba(108, 88, 179, 0.75);
+            border: 2px solid rgba(108, 89, 179, 0.75);
+        }
+        .btn {
+            border-radius: 40px;
+        }
+        .btn-default:hover {
+            color: rgba(108, 88, 179, 0.75);
+            background: transparent;
+            transition: all 0.3s ease 0s;
+            border: 2px solid rgba(108, 89, 179, 0.75);
+        }
+        .btn-cancel {
+            border-radius: 40px;
+        }
+        .btn-cancel:hover {
+            color: rgba(108, 88, 179, 0.75);
+            background: transparent;
+            transition: all 0.3s ease 0s;
+            border: 2px solid rgb(192, 192, 192);
         }
     </style>
 </head>
@@ -46,7 +83,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container d-flex justify-content-between">
                     <div class="d-flex justify-content-start w-33">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="@Url.Action("Index")">
                             <img src="~/images/BrainBuster.png" width="100" height="100" class="d-inline-block align-top rounded"
                                  alt="">
                         </a>
@@ -58,11 +95,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index")">Home</a>
                                 </li>
-                                <li class="nav-item">
+                                <!--<li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Quiz")">Play Quiz</a>
-                                </li>
+                                </li>-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Create")">Create Quiz</a>
+                                    <a class="nav-link" href="@Url.Action("Dashboard")">Create Quiz</a>
                                 </li>
                             </ul>
                         </div>
