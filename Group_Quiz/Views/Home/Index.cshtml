@@ -2,16 +2,27 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container vh-100 d-flex justify-content-center align-items-center ">
-    <div class="row">
-        <div class="col">
-            <div class="card text-center card-custom gradient-bg">
-                <div class="card-body text-white">
-                    <h2 class="card-title m-2 pt-5"> BrainWave Quiz</h2>
-                    <h3 class="card-text py-5 ">Test your knowledge! And Take The Quiz</h3>
-                    <a href="@Url.Action("Quiz")" class="btn btn-primary p-2">Start Quiz</a>
-                    <a href="@Url.Action("Dashboard")" class="btn btn-secondary p-2">Create a Quiz</a>
+<div class="bg-image">
+<div class="container " style=" text-align: center">
+    <div class="card">
+        <div class="row">
+            <div class="col-12">
+                <div class="logo-container">
+                    <img src="~/images/logo-removebg.png" alt="BrainWave Logo" class="logo">
                 </div>
+            </div>
+            <div class="col-12">
+                <h1 class="font-weight-bold">Welcome!</h1>
+                <h2 class="font-weight-bold">Ride the Waves of Knowledge and Fun!</h2>
+            </div>
+            <div class="col-12 py-2">
+                <a href="@Url.Action("Quiz")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Start Quiz</a><br>
+            </div>
+            <div class="col-12 py-2 ">
+                <a href="@Url.Action("Dashboard")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Create a Quiz</a>
             </div>
         </div>
     </div>
+
+</div>
+</div>
