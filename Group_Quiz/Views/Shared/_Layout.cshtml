@@ -94,6 +94,34 @@
         .option:hover {
             background-color: #f1f1f1;
         }
+        /*Result Page*/
+        .result-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .result-container {
+            text-align: center;
+            background: white;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .score-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .score-details div {
+            text-align: center;
+        }
+
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
         /*All pages*/
         .btn-default {
             background: rgba(108, 88, 179, 0.75);
@@ -148,9 +176,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index")">Home</a>
                                 </li>
-                                <!--<li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Quiz")">Play Quiz</a>
-                                </li>-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Result")">Result</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Dashboard")">Create Quiz</a>
                                 </li>
