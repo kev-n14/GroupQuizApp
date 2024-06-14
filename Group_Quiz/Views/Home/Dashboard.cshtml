@@ -6,22 +6,24 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<div class="container mt-5">
+
+<div class="container question-list">
     <div class="d-flex justify-content-between align-items-center mb-4">
-       
+
         <a href="@Url.Action("Create")" class="btn btn-success">Add Question</a>
     </div>
-    <div id="question-list">
+    <div class="question-item">
         @foreach (var question in Model)
         {
-        <div class="question-card-dash d-flex justify-content-between align-items-center">
             <span>@question.QuestionText</span>
-            <div>
-                <a href="@Url.Action("Edit", new{ id = question.QuestionId})" class="btn btn-primary btn-sm mr-2">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            <div class="question-actions">
+                <div>
+                    <a href="@Url.Action("Edit", new{ id = question.QuestionId})" class="btn btn-primary btn-sm mr-2">Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+                
             </div>
-        </div>
-        }
         
+        }
     </div>
-    
+</div>
