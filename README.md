@@ -1,7 +1,7 @@
 # GroupQuizApp
 This project aims to create an Application in C# with CRUD functionality.
 
-![logo](https://res.cloudinary.com/practicaldev/image/fetch/s--2XdEnCAM--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://raw.githubusercontent.com/sandeepkumar17/td-dev.to/di-collection-posts/assets/blog-cover/c-sharp.png)
+![logo](https://res.cloudinary.com/dlulkctls/image/upload/v1718650127/GroupQuiz/logo-removebg_alfhqb.png)
 # Quiz Application
 
 
