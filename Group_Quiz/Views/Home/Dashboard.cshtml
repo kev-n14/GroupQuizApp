@@ -15,6 +15,8 @@
     <div class="question-item">
         @foreach (var question in Model)
         {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+             
             <span>@question.QuestionText</span>
             <div class="question-actions">
                 <div>
@@ -23,7 +25,7 @@
                 </div>
                 
             </div>
-        
+        </li>
         }
     </div>
 </div>

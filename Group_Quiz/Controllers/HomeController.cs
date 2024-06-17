@@ -1,21 +1,27 @@
 using Group_Quiz.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Group_Quiz.Data;
+using Group_Quiz.Models;
+
 
 namespace Group_Quiz.Controllers
 {
+
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
+        private readonly QuizDbContext _context;
 
         //temporary in-memory storage for quizzes
         public static List<Question> _question = new List<Question> ();
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, QuizDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -44,10 +50,9 @@ namespace Group_Quiz.Controllers
                 {
                     question.Answers = new List<Answer>();
                 }
-                // Generate a unique ID for the new question
-                question.QuestionId = _question.Any() ? _question.Max(q => q.QuestionId) + 1 : 1;
-                // Add the new question to the list
-                _question.Add(question);
+                _context.Questions.Add(question);
+                _context.SaveChanges();
+               
                 return RedirectToAction("Dashboard");
             }
             return View(question);
@@ -55,12 +60,8 @@ namespace Group_Quiz.Controllers
 
         public IActionResult Dashboard()
         {
-            if (_question == null)
-            {
-                _question = new List<Question>();
-            }
-            
-            return View(_question);
+            var questions = _context.Questions.Include(q => q.Answers).ToList();
+            return View(questions);
         }
         public IActionResult Edit()
         {
@@ -69,8 +70,8 @@ namespace Group_Quiz.Controllers
         }
         public IActionResult Quiz()
         {
-            
-            return View(_question);
+            var questions = _context.Questions.Include(q => q.Answers).ToList();
+            return View(questions);
         }
         public IActionResult Result()
         {
