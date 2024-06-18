@@ -22,12 +22,13 @@ namespace Group_Quiz.Controllers
             _logger = logger;
             _context = context;
         }
-
+        //Index Action
         public IActionResult Index()
         {
             return View("Index");
         }
-        
+
+        //Get Create Action
         [HttpGet]
         public IActionResult Create()
         {
@@ -39,6 +40,8 @@ namespace Group_Quiz.Controllers
             
             return View(model);
         }
+
+        //Post Create Action
         [HttpPost]
         public IActionResult Create(Question question)
         {
@@ -56,17 +59,38 @@ namespace Group_Quiz.Controllers
             }
             return View(question);
         }
-
+        
+        //Dashboard Action
         public IActionResult Dashboard()
         {
             var questions = _context.Questions.Include(q => q.Answers).ToList();
             return View(questions);
         }
-        public IActionResult Edit()
+
+        //Edit Action
+        public IActionResult Edit(int id)
         {
-            
-            return View();
+            var question = _context.Questions.Include(q => q.Answers).FirstOrDefault(q => q.QuestionId == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
         }
+
+        public IActionResult SaveEdit(Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(question).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            return View(question);
+        
+        }
+
+        //Quiz Action
         public async Task<IActionResult> Quiz(int? id, int currentIndex =0)
         {
             var questions = await _context.Questions.Include(q => q.Answers).ToListAsync();
@@ -95,6 +119,7 @@ namespace Group_Quiz.Controllers
             return View(question);
         }
 
+        //NextQuestion Action
         public async Task<IActionResult> NextQuestion(int questionId, int currentIndex, int selectedAnswerId)
         {
             var questions = await _context.Questions.Include(q => q.Answers).ToListAsync();
@@ -109,12 +134,13 @@ namespace Group_Quiz.Controllers
             }
         }
 
-
+        //Result Action
         public IActionResult Result()
         {
             //calculate and display result
             return View();
         }
+
 
         public IActionResult Delete(int id)
         {
