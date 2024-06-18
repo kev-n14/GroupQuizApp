@@ -13,8 +13,10 @@
         <a href="@Url.Action("Create")" class="btn btn-success">Add Question</a>
     </div>
     <div class="question-item">
+        <ul class="list-group col-12">
         @foreach (var question in Model)
         {
+            <div class="col-12 my-2">
             <li class="list-group-item d-flex justify-content-between align-items-center">
              
             <span>@question.QuestionText</span>
@@ -26,6 +28,8 @@
                 
             </div>
         </li>
+        </div>
         }
+        </ul>
     </div>
 </div>

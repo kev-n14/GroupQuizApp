@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Group_Quiz.Data;
-using Group_Quiz.Models;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 
 namespace Group_Quiz.Controllers
@@ -15,9 +16,7 @@ namespace Group_Quiz.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly QuizDbContext _context;
 
-        //temporary in-memory storage for quizzes
-        public static List<Question> _question = new List<Question> ();
-
+       
         public HomeController(ILogger<HomeController> logger, QuizDbContext context)
         {
             _logger = logger;
@@ -68,25 +67,59 @@ namespace Group_Quiz.Controllers
             
             return View();
         }
-        public IActionResult Quiz()
+        public async Task<IActionResult> Quiz(int? id, int currentIndex =0)
         {
-            var questions = _context.Questions.Include(q => q.Answers).ToList();
-            return View(questions);
+            var questions = await _context.Questions.Include(q => q.Answers).ToListAsync();
+            if (questions.Count == 0)
+            {
+                return View("Error");
+            }
+            Question question = null;
+            if (id.HasValue)
+            {
+                question = questions.FirstOrDefault(q => q.QuestionId == id.Value);
+            }
+
+            if (question == null && questions.Count > 0)
+            {
+                question = questions[currentIndex];
+            }
+
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["CurrentQuestionIndex"] = currentIndex;
+            ViewData["Questions"] = questions;
+            return View(question);
         }
+
+        public async Task<IActionResult> NextQuestion(int questionId, int currentIndex, int selectedAnswerId)
+        {
+            var questions = await _context.Questions.Include(q => q.Answers).ToListAsync();
+
+            if (currentIndex < questions.Count - 1)
+            {
+                return RedirectToAction("Quiz", new { id = questions[currentIndex + 1].QuestionId, currentIndex = currentIndex + 1 });
+            }
+            else 
+            {
+                return RedirectToAction("Result");
+            }
+        }
+
+
         public IActionResult Result()
         {
-            
+            //calculate and display result
             return View();
         }
 
         public IActionResult Delete(int id)
         {
-            var question = _question.Find(q => q.QuestionId == id);
-            if (question != null) {
-
-                return NotFound();
-            }
-            return View(question);
+            
+            return View();
         }
 
 

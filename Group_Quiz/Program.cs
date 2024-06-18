@@ -38,9 +38,17 @@ namespace Group_Quiz
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "quiz",
+                    pattern: "quiz/{id?}",
+                    defaults: new { controller = "Home", action = "Quiz" });
+            });
 
             app.Run();
         }
