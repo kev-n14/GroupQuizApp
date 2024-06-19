@@ -191,14 +191,25 @@ namespace Group_Quiz.Controllers
         public IActionResult Delete(int id)
         {
 
-            var question = _context.Questions.Find(id);
+            var question = _context.Questions.Include(q => q.Answers).FirstOrDefault(q => q.QuestionId == id);
             if (question == null)
             {
                 return NotFound();
             }
 
-            _context.Questions.Remove(question);
-            _context.SaveChanges();
+            try
+            {
+                _context.Answers.RemoveRange(question.Answers);
+                _context.Questions.Remove(question);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                
+                var innerException = ex.InnerException;
+                Console.WriteLine(innerException?.Message);
+                throw; 
+            }
 
             return RedirectToAction("Dashboard");
         }
