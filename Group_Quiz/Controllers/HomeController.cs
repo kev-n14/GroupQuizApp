@@ -82,12 +82,58 @@ namespace Group_Quiz.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(question).State = EntityState.Modified;
-                _context.SaveChanges();
-                return RedirectToAction("Dashboard");
+                try
+                {
+                    // Fetch the existing question from the database
+                    var existingQuestion = _context.Questions.Include(q => q.Answers)
+                                                             .FirstOrDefault(q => q.QuestionId == question.QuestionId);
+
+                    if (existingQuestion == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update the existing question with the new values
+                    existingQuestion.QuestionText = question.QuestionText;
+                    existingQuestion.Category = question.Category;
+                    existingQuestion.Difficulty = question.Difficulty;
+                    existingQuestion.Points = question.Points;
+                    existingQuestion.Locale = question.Locale;
+                    existingQuestion.Type = question.Type;
+
+                    // Remove existing answers and add updated answers
+                    _context.Answers.RemoveRange(existingQuestion.Answers);
+                    existingQuestion.Answers = question.Answers;
+
+                    // Handle concurrency
+                    _context.Entry(existingQuestion).Property(q => q.RowVersion).OriginalValue = question.RowVersion;
+
+                    _context.SaveChanges();
+                    return RedirectToAction("Dashboard");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    var entry = ex.Entries.Single();
+                    var databaseValues = entry.GetDatabaseValues();
+                    if (databaseValues == null)
+                    {
+                        ModelState.AddModelError("", "Unable to save changes. The question was deleted by another user.");
+                    }
+                    else
+                    {
+                        var databaseEntity = (Question)databaseValues.ToObject();
+                        ModelState.AddModelError("", "The record you attempted to edit "
+                            + "was modified by another user after you got the original value. The "
+                            + "edit operation was canceled and the current values in the database "
+                            + "have been displayed. If you still want to edit this record, click "
+                            + "the Save button again. Otherwise click the Back to List hyperlink.");
+                        question.RowVersion = databaseEntity.RowVersion;
+                        ModelState.Remove("RowVersion");
+                    }
+                }
             }
             return View(question);
-        
+
         }
 
         //Quiz Action
@@ -144,8 +190,17 @@ namespace Group_Quiz.Controllers
 
         public IActionResult Delete(int id)
         {
-            
-            return View();
+
+            var question = _context.Questions.Find(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            _context.Questions.Remove(question);
+            _context.SaveChanges();
+
+            return RedirectToAction("Dashboard");
         }
 
 

@@ -61,6 +61,15 @@ namespace Group_Quiz.Migrations
                 name: "IX_Answers_QuestionId",
                 table: "Answers",
                 column: "QuestionId");
+
+            migrationBuilder.AddColumn<byte[]>(
+               name: "RowVersion",
+               table: "Questions",
+               type: "timestamp",
+               nullable: false,
+               defaultValueSql: "CURRENT_TIMESTAMP",
+               rowVersion: true // This is to indicate it's a row version column
+           );
         }
 
         /// <inheritdoc />
@@ -71,6 +80,10 @@ namespace Group_Quiz.Migrations
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropColumn(
+           name: "RowVersion",
+           table: "Questions");
         }
     }
 }

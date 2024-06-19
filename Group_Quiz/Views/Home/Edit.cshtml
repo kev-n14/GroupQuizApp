@@ -6,7 +6,9 @@
 <div class="container mt-5">
     <h1 class="mb-4">@ViewData["Title"] Question</h1>
     
-    <form asp-action="SaveEdit" method="post">
+    <form id="edit-form" asp-action="SaveEdit" method="post">
+        <input type="hidden" asp-for="QuestionId" />
+        <input type="hidden" asp-for="RowVersion" />
         <div class="form-group">
             <label asp-for="QuestionText" class="control-label"></label>
             <input asp-for="QuestionText" class="form-control"/>
@@ -79,6 +81,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             const answersContainer = document.getElementById('answers-container');
             const addAnswerButton = document.querySelector('.btn-add-answer');
+            const saveButton = document.querySelector('button[type="submit"]');
+            const editForm = document.getElementById('edit-form');
             let answerIndex = @Model.Answers.Count;
 
             addAnswerButton.addEventListener('click', function () {
@@ -107,6 +111,13 @@
             answersContainer.addEventListener('click', function (e) {
                 if (e.target.classList.contains('btn-remove-answer')) {
                     e.target.closest('.answer-item').remove();
+                }
+            });
+
+            saveButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+                if (confirm('Are you sure you want to save the changes?')) {
+                    editForm.submit(); // Submit the form if the user confirms
                 }
             });
         });

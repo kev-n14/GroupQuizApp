@@ -23,7 +23,10 @@
             <div class="question-actions">
                 <div>
                     <a href="@Url.Action("Edit", new{ id = question.QuestionId})" class="btn btn-primary btn-sm mr-2">Edit</a>
-                    <a href="@Url.Action("Delete", new { id = question.QuestionId })" class="btn btn-danger btn-sm">Delete</a>
+
+                            <form asp-action="Delete" asp-route-id="@question.QuestionId" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
+                            </form>
                 </div>
                 
             </div>

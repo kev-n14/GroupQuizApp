@@ -8,5 +8,13 @@ namespace Group_Quiz.Data
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Question>()
+        .Property(q => q.RowVersion)
+        .IsConcurrencyToken()
+        .ValueGeneratedOnAddOrUpdate();
+        }
     }
 }
