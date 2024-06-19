@@ -29,7 +29,7 @@
             background-image: url("@Url.Content("~/images/background.png")");
             background-repeat: no-repeat, repeat;
             background-position: center;
-            width: 100vw;
+            /*width: 100vw;*/
             height: 100vh;
             background-size: cover;
         }
@@ -195,7 +195,7 @@
             position: fixed;
             left: 0;
             bottom: 0;
-            width: 100%;
+            width: 100vw;
             background-color: #f8f9fa; 
             text-align: center;
             padding: 10px 0;
@@ -226,7 +226,7 @@
                                     <a class="nav-link" href="@Url.Action("Result")">Result</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Dashboard")">Create Quiz</a>
+                                    <a class="nav-link" href="@Url.Action("Dashboard")">Quiz Dashboard</a>
                                 </li>
                             </ul>
                         </div>
@@ -235,14 +235,15 @@
                 </div>
             </nav>
         </header>
-        <main role="main" class="pb-3 mb-3">
+        <main role="main">
             @RenderBody()
         </main>
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                This Website was developed by 
+        <footer class="bg-body-tertiary text-center text-lg-start">
+            <div class="text-center p-3">
+                This Website was developed by: 
             </div>
         </footer>
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka6K4BqP7YW5tL6Nz15C9x4D1uO//3SBH2A9dk0DLCa/lLMCxHTfMf5X+E/L7gDB" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)

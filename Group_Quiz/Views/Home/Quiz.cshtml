@@ -4,7 +4,7 @@
     ViewData["Title"] = "Quiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="text-center">@ViewData["Title"]</h1>
+<div class="bg-image">
 <div class="container vh-100 d-flex justify-content-center align-items-center">
     @if (Model != null && ViewData["Questions"] != null)
     {
@@ -46,7 +46,7 @@
         <p>Error: No questions found.</p>
     }
 </div>
-   
+</div>
 @section Scripts{
     <script>
         

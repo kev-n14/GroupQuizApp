@@ -3,22 +3,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="bg-image">
-<div class="container " style=" text-align: center">
+<div class="container ">
     <div class="card">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center">
                 <div class="logo-container">
                     <img src="~/images/logo-removebg.png" alt="BrainWave Logo" class="logo">
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 text-center">
                 <h1 class="font-weight-bold">Welcome!</h1>
                 <h2 class="font-weight-bold">Ride the Waves of Knowledge and Fun!</h2>
             </div>
-            <div class="col-12 py-2">
+            <div class="col-12 py-2 text-center">
                 <a href="@Url.Action("Quiz")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Start Quiz</a><br>
             </div>
-            <div class="col-12 py-2 ">
+            <div class="col-12 py-2 text-center">
                 <a href="@Url.Action("Dashboard")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Create a Quiz</a>
             </div>
         </div>
