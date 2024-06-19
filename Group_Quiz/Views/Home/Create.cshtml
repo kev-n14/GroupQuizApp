@@ -48,27 +48,32 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <input asp-for="Answers[i].Text" class="form-control" placeholder="Enter answer text" />
-                                <span asp-validation-for="Answers[i].Text" class="text-danger"></span>
+                                <span asp-asp-validation-for="Answers[i].Text" class="text-danger"></span>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check">
                                     <input asp-for="Answers[i].IsCorrect" class="form-check-input" />
                                     <label asp-for="Answers[i].IsCorrect" class="form-check-label">Correct</label>
+
                                 </div>
                                 <span asp-validation-for="Answers[i].IsCorrect" class="text-danger"></span>
+
                             </div>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-danger btn-remove-answer">Remove</button>
                             </div>
                         </div>
                     </div>
+
+
                 }
-            </div>
-            <button type="button" class="btn btn-success btn-add-answer">Add Answer</button>
+            </div>  
         </div>
-        <div class="my-2"></div>
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a asp-action="Dashboard" class="btn btn-secondary">Cancel</a>
+        <button type="button" class="btn btn-success btn-add-answer">Add Answer</button>
+        <div class="my-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mx-2">Add Question</button>
+            <a asp-action="Dashboard" class="btn btn-secondary mx-2">Cancel</a>
+        </div>
     </form>
 </div>
 @section Scripts {
@@ -76,13 +81,27 @@
         document.addEventListener('DOMContentLoaded', function () {
             const answersContainer = document.getElementById('answers-container');
             const addAnswerButton = document.querySelector('.btn-add-answer');
-            let answerIndex = @Model.Answers.Count;
+            const questionTypeSelect = document.getElementById('question-type');
+            let answerIndex = @(Model.Answers.Count);
+
+            function updateAddAnswerButton() {
+                const answerItems = answersContainer.querySelectorAll('.answer-item');
+                const questionType = questionTypeSelect.value;
+
+                if (questionType === 'MultipleChoice') {
+                    addAnswerButton.disabled = answerItems.length >= 4;
+                } else if (questionType === 'TrueFalse') {
+                    addAnswerButton.disabled = answerItems.length >= 2;
+                } else {
+                    addAnswerButton.disabled = false;
+                }
+            }
 
             addAnswerButton.addEventListener('click', function () {
                 const answerItem = document.createElement('div');
                 answerItem.className = 'answer-item mb-3';
                 answerItem.innerHTML = `
-                            <div class="row">
+                                   <div class="row">
                                 <div class="col-md-8">
                                     <input name="Answers[${answerIndex}].Text" class="form-control" placeholder="Enter answer text" />
                                 </div>
@@ -99,13 +118,32 @@
                         `;
                 answersContainer.appendChild(answerItem);
                 answerIndex++;
+                updateAddAnswerButton();
             });
 
             answersContainer.addEventListener('click', function (e) {
                 if (e.target.classList.contains('btn-remove-answer')) {
                     e.target.closest('.answer-item').remove();
+                    updateAddAnswerButton();
                 }
             });
+            questionTypeSelect.addEventListener('change', function () {
+                const answerItems = answersContainer.querySelectorAll('.answer-item');
+                const questionType = questionTypeSelect.value;
+
+                if (questionType === 'TrueFalse' && answerItems.length > 2) {
+                    while (answerItems.length > 2) {
+                        answerItems[answerItems.length - 1].remove();
+                    }
+                } else if (questionType === 'MultipleChoice' && answerItems.length < 2) {
+                    while (answerItems.length < 2) {
+                        addAnswerButton.click();
+                    }
+                }
+                updateAddAnswerButton();
+            });
+
+            updateAddAnswerButton();
         });
     </script>
 }
