@@ -85,10 +85,15 @@ You view the wireframes for this Application here.
 <details>
     
 <summary>Wireframes Board</summary>
+
 ![Index Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247363/GroupQuiz/index_vuqnts.png)
+
 ![Quiz Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/quiz_vhg7rl.png)
+
 ![Result Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247363/GroupQuiz/result_bl4kix.png)
+
 ![Dashboard Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/Dashboard1_o2ee1l.png)
+
 ![Create Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/edit_rh3vsq.png)
 </details> 
 
