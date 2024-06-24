@@ -117,11 +117,6 @@ You view the wireframes for this Application here.
 
 ---
 
-
-This code defines the structure of a relational database using the Database Markup Language (DBML). Each table in the database is defined with its attributes, data types, constraints, and relationships. Here's a brief description of each table and its purpose:
-
-
-
 ### Design Elements Overview
 ---
 * **Typography**: We use 'Roboto' as our primary font for its clean and modern look, with 'Arial' and sans-serif as fallbacks.
