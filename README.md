@@ -185,7 +185,8 @@ Form validation is implemented to ensure the integrity and correctness of data e
 ## Technologies Used
 ---
 ### Languages Used
-* [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)#:~:text=C%23%20(%2F%CB%8Csi%CB%90%20%CB%88,and%20component%2Doriented%20programming%20disciplines.)
+
+* [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)#:~:text=C%23%20(%2F%CB%8Csi%CB%90%20%CB%88,and%20component%2Doriented%20programming%20disciplines.))
 * [HTML]()
 * [CSS]()
 * [javaScript]()
