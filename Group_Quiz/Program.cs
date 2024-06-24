@@ -14,7 +14,7 @@ namespace Group_Quiz
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling =
             Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -33,7 +33,7 @@ namespace Group_Quiz
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

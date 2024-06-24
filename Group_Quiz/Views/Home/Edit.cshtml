@@ -1,73 +1,68 @@
 ﻿@model Group_Quiz.Models.Question
+
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!--from this point-->
 <div class="container mt-5">
     <h1 class="mb-4 text-center">@ViewData["Title"] Question</h1>
-    
+
     <form id="edit-form" asp-action="SaveEdit" method="post">
         <input type="hidden" asp-for="QuestionId" />
         <input type="hidden" asp-for="RowVersion" />
         <div class="form-group">
             <label asp-for="QuestionText" class="control-label"></label>
-            <input asp-for="QuestionText" class="form-control"/>
+            <input asp-for="QuestionText" class="form-control" />
             <span asp-validation-for="QuestionText" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Category" class="control-label"></label>
             <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<QuestionCategory>()"></select>
-            <span asp-validation-for ="Category" class="text-danger"></span>
+            <span asp-validation-for="Category" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Difficulty" class="control-label"></label>
             <select asp-for="Difficulty" class="form-control" asp-items="Html.GetEnumSelectList<DifficultyLevel>()"></select>
-            <span asp-validation-for ="Difficulty" class="text-danger"></span>
+            <span asp-validation-for="Difficulty" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Points" class="control-label"></label>
-            <input asp-for="Points" class="form-control"/>
+            <input asp-for="Points" class="form-control" />
             <span asp-validation-for="Points" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Locale" class="control-label"></label>
             <input asp-for="Locale" class="form-control" />
             <span asp-validation-for="Locale" class="text-danger"></span>
+        </div>
         <div class="form-group">
             <label asp-for="Type" class="control-label"></label>
             <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<QuestionType>()"></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
+            <span asp-validation-for="Type" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Answers" class="control-label">Answers</label>
             <div id="answers-container">
-                @for(int i =0; i < Model.Answers.Count; i++)
-                    {
-                        <div class="answer-item mb-3">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input asp-for="Answers[i].Text" class="form-control" placeholder="Enter answer text"/>
-                                    <span asp-asp-validation-for="Answers[i].Text" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input asp-for="Answers[i].IsCorrect" class="form-check-input" />
-                                        <label asp-for="Answers[i].IsCorrect" class="form-check-label">Correct</label>
-
-                                    </div>
-                                    <span asp-validation-for="Answers[i].IsCorrect" class="text-danger"></span>
-
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger btn-remove-answer">Remove</button>
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <div class="answer-item mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input asp-for="Answers[i].Text" class="form-control" />
+                                <input asp-for="Answers[i].AnswerId" type="hidden" />
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="radio" name="CorrectAnswer" class="form-check-input" value="@Model.Answers[i].AnswerId" @(Model.Answers[i].IsCorrect ? "checked" : "") />
+                                    <label class="form-check-label">Correct</label>
                                 </div>
                             </div>
                         </div>
-
-
-                    }
-                </div>
-                <button type="button" class="btn btn-success btn-add-answer mt-3">Add Answer</button>
+                    </div>
+                }
+            </div>
+            <button type="button" class="btn btn-success btn-add-answer mt-3">Add Answer</button>
         </div>
 
         <div class="my-2">
@@ -76,6 +71,7 @@
         </div>
     </form>
 </div>
+
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -95,7 +91,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-check">
-                                        <input type="checkbox" name="Answers[${answerIndex}].IsCorrect" class="form-check-input" />
+                                        <input type="radio" name="CorrectAnswer" class="form-check-input" />
                                         <label class="form-check-label">Correct</label>
                                     </div>
                                 </div>
@@ -116,6 +112,13 @@
 
             saveButton.addEventListener('click', function (event) {
                 event.preventDefault(); // Prevent the form from submitting immediately
+                // Ensure at least one correct answer is selected
+                const selectedCorrectAnswer = answersContainer.querySelector('input[name="CorrectAnswer"]:checked');
+                if (!selectedCorrectAnswer) {
+                    alert('Please select the correct answer.');
+                    return;
+                }
+
                 if (confirm('Are you sure you want to save the changes?')) {
                     editForm.submit();
                 }

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1 class="text-center">@ViewData["Title"] New Question</h1>
-
+<!--from this point-->
 <div class="container mt-5">
     
 
@@ -34,41 +34,30 @@
             <input asp-for="Locale" class="form-control" />
             <span asp-validation-for="Locale" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group pb-3">
             <label asp-for="Type" class="control-label"></label>
             <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<QuestionType>()"></select>
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Answers" class="control-label">Answers</label>
-            <div id="answers-container">
-                @for (int i = 0; i < Model.Answers.Count; i++)
-                {
-                    <div class="answer-item mb-3">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <input asp-for="Answers[i].Text" class="form-control" placeholder="Enter answer text" />
-                                <span asp-asp-validation-for="Answers[i].Text" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-check">
-                                    <input asp-for="Answers[i].IsCorrect" class="form-check-input" />
-                                    <label asp-for="Answers[i].IsCorrect" class="form-check-label">Correct</label>
-
-                                </div>
-                                <span asp-validation-for="Answers[i].IsCorrect" class="text-danger"></span>
-
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-danger btn-remove-answer">Remove</button>
+        <div id="answers-container">
+            @for (int i = 0; i < Model.Answers.Count; i++)
+            {
+                <div class="answer-item mb-3">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input asp-for="Answers[i].Text" class="form-control" placeholder="Enter answer text" />
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input type="radio" name="CorrectAnswer" class="form-check-input" value="@i" @(Model.Answers[i].IsCorrect ? "checked" : "") />
+                                <label class="form-check-label">Correct</label>
                             </div>
                         </div>
                     </div>
-
-
-                }
-            </div>  
+                </div>
+            }
         </div>
+        
         <button type="button" class="btn btn-success btn-add-answer">Add Answer</button>
         <div class="my-2 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary mx-2">Add Question</button>
@@ -101,21 +90,18 @@
                 const answerItem = document.createElement('div');
                 answerItem.className = 'answer-item mb-3';
                 answerItem.innerHTML = `
-                                   <div class="row">
-                                <div class="col-md-8">
-                                    <input name="Answers[${answerIndex}].Text" class="form-control" placeholder="Enter answer text" />
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input type="checkbox" name="Answers[${answerIndex}].IsCorrect" class="form-check-input" />
-                                        <label class="form-check-label">Correct</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger btn-remove-answer">Remove</button>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input name="Answers[${answerIndex}].Text" class="form-control" placeholder="Enter answer text" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="radio" name="CorrectAnswer" class="form-check-input" value="${answerIndex}" />
+                                <label class="form-check-label">Correct</label>
                             </div>
-                        `;
+                        </div>
+                    </div>
+                `;
                 answersContainer.appendChild(answerItem);
                 answerIndex++;
                 updateAddAnswerButton();
@@ -127,6 +113,7 @@
                     updateAddAnswerButton();
                 }
             });
+
             questionTypeSelect.addEventListener('change', function () {
                 const answerItems = answersContainer.querySelectorAll('.answer-item');
                 const questionType = questionTypeSelect.value;

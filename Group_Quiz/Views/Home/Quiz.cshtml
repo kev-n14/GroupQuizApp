@@ -1,55 +1,74 @@
-﻿
-@model Group_Quiz.Models.Question
+﻿@model Group_Quiz.Models.Question
 @{
     ViewData["Title"] = "Quiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="bg-image">
-<div class="container vh-100 d-flex justify-content-center align-items-center">
-    @if (Model != null && ViewData["Questions"] != null)
-    {
-        var questions = ViewData["Questions"] as List<Group_Quiz.Models.Question>;
-        var currentIndex = (int)ViewData["CurrentQuestionIndex"];
-        var question = Model;
-
-        <div class="question-card">
-            <div class="text-center mb-4">
-                <p>Question: @(currentIndex +1) of @questions.Count</p>
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        @if (Model != null && ViewData["Questions"] != null)
+        {
+            var questions = ViewData["Questions"] as List<Group_Quiz.Models.Question>;
+            var currentIndex = (int)ViewData["CurrentQuestionIndex"];
+            var question = Model;
+            <div class="question-card">
+                <div class="text-center mb-4">
+                    <p>Question: @(currentIndex + 1) of @questions.Count</p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-center">@question.QuestionText</h3>
+                </div>
+                <form id="quizForm" action="@Url.Action("NextQuestion")" method="post">
+                    <input type="hidden" name="questionId" value="@question.QuestionId" />
+                    <input type="hidden" name="currentIndex" value="@currentIndex" />
+                    <div class="answer-options">
+                        @foreach (var answer in question.Answers)
+                        {
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="selectedAnswerId" id="answer_@answer.AnswerId" value="@answer.AnswerId">
+                                        <label class="form-check-label w-100" for="answer_@answer.AnswerId">
+                                            @answer.Text
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        @if (currentIndex > 0)
+                        {
+                            <a href="@Url.Action("Quiz", new { id = questions[currentIndex - 1].QuestionId, currentIndex = currentIndex - 1 })" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Previous</a>
+                        }
+                        @if (currentIndex < questions.Count - 1)
+                        {
+                            <button type="submit" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Next</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Submit Quiz</button>
+                        }
+                    </div>
+                </form>
             </div>
-            <div class="mb-4">
-                <h3 class="text-center">@question.QuestionText</h3>
-            </div>
-            <div class="list-group">
-                @foreach (var answer in question.Answers)
-                {
-                    <div class="list-group-item option border p-3 my-2">@answer.Text</div>
-                }
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-4">
-                @if (currentIndex > 0)
-                {
-                    <a href="@Url.Action("Quiz", new { id = questions[currentIndex - 1].QuestionId, currentIndex = currentIndex - 1 })" class="btn btn-primary">Previous</a>
-                }
-                @if (currentIndex < questions.Count - 1)
-                {
-                    <a href="@Url.Action("Quiz", new { id = questions[currentIndex + 1].QuestionId, currentIndex = currentIndex + 1 })" class="btn btn-primary">Next</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("Result")" class="btn btn-primary">Submit Quiz</a>
-                }
-            </div>
-        </div>
-    }
-    else
-    {
-        <p>Error: No questions found.</p>
-    }
-</div>
+        }
+        else
+        {
+            <p>Error: No questions found.</p>
+        }
+    </div>
 </div>
 @section Scripts{
     <script>
-        
-//Event listener
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const answerCards = document.querySelectorAll('.answer-options .card');
+            answerCards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                });
+            });
+        });
     </script>
 }

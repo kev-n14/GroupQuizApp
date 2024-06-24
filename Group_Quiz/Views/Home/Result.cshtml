@@ -1,33 +1,55 @@
-﻿@model List<Group_Quiz.Models.Question>
+﻿@model Group_Quiz.Models.ResultViewModel
 @{
     ViewData["Title"] = "Result";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    double scorePercentage = (double)Model.Score / Model.TotalPossibleScore * 100;
+    bool isPassing = scorePercentage >= 50;
 }
-<h1>@ViewData["Title"]</h1>
-<div class="container result-container">
-    <h2>Quiz Summary</h2>
-        <img src="~/images/result-trophy.png" alt="Trophy Image" class="mb-4">
-    <h3>Congratulations!</h3>
-    <p>You've scored ..%</p>
-    <div class="divider"></div>
-        div class="score-details">
-            <div>
-        
-        <h4>5</h4>
-                <p>Total questions</p>
+<div class="bg-image">
+<div class="container result-container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if (isPassing)
+                    {
+                        <h2 class="mb-4">Congratulations!</h2>
+                        <img src="~/images/result-trophy.png" alt="Congratulations" class="img-fluid mb-4" style="max-width: 200px;">
+                        <p class="lead">Great job! You've passed the quiz!</p>
+                    }
+                    else
+                    {
+                        
+                            <img src="~/images/better_luck.png" alt="Try Again" class="img-fluid mb-4" style="max-width: 200px;">
+                        <p class="lead">Don't give up! Keep practicing and you'll improve.</p>
+                    }
+
+                    <h3>Your Score: @Model.Score out of @Model.TotalPossibleScore</h3>
+                    <p>Percentage: @scorePercentage.ToString("0.##")%</p>
+
+                    <div class="score-details mt-4">
+                        <div>
+                            <p>Total questions</p>
+                            <h4>@Model.TotalQuestions</h4>
+                        </div>
+                        <div>
+                            <p>Points earned</p>
+                            <h4>@Model.Score</h4>  
+                        </div>
+                        <div>
+                            <p>Total possible points</p>
+                            <h4>@Model.TotalPossibleScore</h4>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Back to Home</a>
+                            <a href="@Url.Action("Quiz", "Home")" class="btn  btn-secondary mb-2 rounded-pill px-5 font-weight-bold">Try Again</a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h4>3</h4>
-                <p>Correct</p>
-            </div>
-            <div>
-                <h4>2</h4>
-                <p>Wrong</p>
-            </div>
-    <div class="my-2">
-            <a href="@Url.Action("Index")" class="btn btn-custom mb-2 rounded-pill px-5 font-weight-bold">Back To Main Page</a><br>
-    </div>
         </div>
-   
-    
+    </div>
+</div>
 </div>
