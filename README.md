@@ -8,11 +8,6 @@ The project allows users to create, manage, and take quizzes on various topics.
 It features a user-friendly interface, dynamic question creation, and a scoring system.
 
 
-[Click here to access the live project]()
-
-
-
-
 ## Table of Contents
 1. [Screenshots](#screenshots)
 2. [Design](#design)
@@ -64,19 +59,19 @@ It features a user-friendly interface, dynamic question creation, and a scoring 
 The project follows the standard ASP.NET MVC structure:
 
 * Controllers: Contains the controllers for handling the requests.
-    * HomeController: Handles main application logic including quiz creation, editing, and taking.
-    * QuestionController: API controller for question-related operations.
+    * **HomeController**: Handles main application logic including quiz creation, editing, and taking.
+    * **QuestionController**: API controller for question-related operations.
       
 * Models: Contains the model classes that define the data structure.
-    * Question: Represents quiz questions with properties like category, difficulty, text, points, and associated answers.
-    * Answer: Represents possible answers to questions.
-    * ResultViewModel: Used to display quiz results.
+    * **Question**: Represents quiz questions with properties like category, difficulty, text, points, and associated answers.
+    * **Answer**: Represents possible answers to questions.
+    * **ResultViewModel**: Used to display quiz results.
       
 * Views: Contains the Razor views for the UI.
-    * Index: Landing page with options to start a quiz or create questions.
-    * Create: Form for creating new questions.
-    * Quiz: Displays questions and handles user responses.
-    * Result: Shows the final quiz score.
+    * **Index**: A landing page with options to start a quiz or create questions.
+    * **Create**: Form for creating new questions.
+    * **Quiz**: Displays questions and handles user responses.
+    * **Result**: Shows the final quiz score.
       
 * Database:
     * Utilizes Entity Framework Core with MySQL for data persistence.
@@ -129,8 +124,8 @@ This code defines the structure of a relational database using the Database Mark
 
 ### Design Elements Overview
 ---
-
-
+* **Typography**: We use 'Roboto' as our primary font for its clean and modern look, with 'Arial' and sans-serif as fallbacks.
+* **Responsive Design**: The application is fully responsive, ensuring a seamless experience across desktop, tablet, and mobile devices.
 
 [Back to Table of Contents ⇧](#table-of-contents)
 
@@ -178,7 +173,14 @@ This code defines the structure of a relational database using the Database Mark
 ---
 Form validation is implemented to ensure the integrity and correctness of data entered by users. The following form validation is included on the Create and Edit pages:
 
+* **Question Text**: Required, minimum length of 2 characters, maximum length of 100 characters.
+* **Category**: Required selection from predefined categories.
+* **Difficulty**: Required selection from predefined difficulty levels.
+* **Points**: Required, must be a number between 0 and 10.
+* **Answers**: At least two answers are required, one must be marked as correct.
 
+**Additional security measures**:
+* Concurrency checks to prevent data conflicts during simultaneous edits.
 
 [Back to Table of Contents ⇧](#table-of-contents)
 
@@ -187,9 +189,9 @@ Form validation is implemented to ensure the integrity and correctness of data e
 ### Languages Used
 
 * [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)#:~:text=C%23%20(%2F%CB%8Csi%CB%90%20%CB%88,and%20component%2Doriented%20programming%20disciplines.))
-* [HTML]()
-* [CSS]()
-* [javaScript]()
+* [HTML](https://en.wikipedia.org/wiki/HTML)
+* [CSS](https://en.wikipedia.org/wiki/CSS)
+* [javaScript](https://en.wikipedia.org/wiki/JavaScript)
 
  ### Frameworks Programs Used
  ---
@@ -252,12 +254,16 @@ Form validation is implemented to ensure the integrity and correctness of data e
 
 ### Functional Testing
 
-1. HTML Validation: Used the W3C HTML Validator to ensure there are no errors in the HTML code.
+1. HTML Validation: Used the W3C HTML Validator to ensure there are no major errors in the HTML code.
 1. CSS Validation: Used the W3C CSS Validator to ensure the CSS file is error-free.
 1. JavaScript Validation: Used JSHint to check for errors and potential problems in the JavaScript code.
 
 ### Unit Testing
+Unit tests were implemented using xUnit for critical components of the application:
 
+1. **QuestionControllerTests**: Tests CRUD operations in the QuestionController.
+1. **QuizLogicTests**: Verifies the scoring and progression logic of the quiz.
+1. **ModelValidationTests**: Ensures that model validation rules are working correctly.
 
 [Back to Table of Contents ⇧](#table-of-contents)
 
@@ -295,11 +301,13 @@ dotnet run
 
 ## Credits
 ---
-* [Microsoft Documentation](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
-* [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
-* [W3school Resouces](https://www.w3schools.com/)
-* [Stack OverFlow](https://stackoverflow.com/)
-* [YouTube Tutorial and Learning Material](https://www.youtube.com/)
+* [Microsoft Documentation](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)- Resources purposes
+* [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)- Resources purposes
+* [W3school Resouces](https://www.w3schools.com/)- Resources purposes
+* [Stack Overflow](https://stackoverflow.com/)- - Resources purposes
+* [YouTube Tutorial and Learning Material](https://www.youtube.com/)- Resources purposes
+* [Canva](https://www.canva.com/)- For design purposes of logo and other icons and images
+* [Figma](https://www.figma.com/)- For design purposes
 
 
 [Back to Table of Contents ⇧](#table-of-contents)
