@@ -39,6 +39,21 @@ It features a user-friendly interface, dynamic question creation, and a scoring 
 ## Screenshots
 ---
 
+<details>
+<summary>Screenshot of Project</summary>
+
+![Index Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247363/GroupQuiz/index_vuqnts.png)
+
+![Quiz Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719248150/GroupQuiz/RQuiz_sen9dj.png)
+
+![Result Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719248151/GroupQuiz/RResult_we6axx.png)
+
+![Dashboard Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719248151/GroupQuiz/Rdashboard_uoe7wy.png)
+
+![Create Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719248151/GroupQuiz/RCreate_xwmuk9.png)
+
+![Edit Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719248151/GroupQuiz/REdit_dg4hg9.png)
+</details> 
 
 
 [Back to Table of Contents ⇧](#table-of-contents)
