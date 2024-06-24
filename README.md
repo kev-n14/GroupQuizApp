@@ -2,8 +2,10 @@
 This project aims to create an Application in C# with CRUD functionality.
 
 ![logo](https://res.cloudinary.com/dlulkctls/image/upload/v1718650282/GroupQuiz/logo_vamcmi.png)
-# Quiz Application
-
+# BrainWave Quiz Application
+BrainWave is a web-based quiz application developed using ASP.NET Core MVC. 
+The project allows users to create, manage, and take quizzes on various topics. 
+It features a user-friendly interface, dynamic question creation, and a scoring system.
 
 
 [Click here to access the live project]()
@@ -47,13 +49,47 @@ This project aims to create an Application in C# with CRUD functionality.
 The project follows the standard ASP.NET MVC structure:
 
 * Controllers: Contains the controllers for handling the requests.
+    * HomeController: Handles main application logic including quiz creation, editing, and taking.
+    * QuestionController: API controller for question-related operations.
+      
 * Models: Contains the model classes that define the data structure.
+    * Question: Represents quiz questions with properties like category, difficulty, text, points, and associated answers.
+    * Answer: Represents possible answers to questions.
+    * ResultViewModel: Used to display quiz results.
+      
 * Views: Contains the Razor views for the UI.
+    * Index: Landing page with options to start a quiz or create questions.
+    * Create: Form for creating new questions.
+    * Quiz: Displays questions and handles user responses.
+    * Result: Shows the final quiz score.
+      
+* Database:
+    * Utilizes Entity Framework Core with MySQL for data persistence.
+    * QuizDbContext manages database operations.    
 * wwwroot: Contains static files such as CSS, JavaScript, and images.
+
+### Design Choices and Logic
+Design Choices and Logic
+
+1. **MVC Architecture**: The project follows the Model-View-Controller pattern, separating concerns and improving maintainability.
+1. **Entity Relationships**: Questions have a one-to-many relationship with Answers, allowing flexible question types (multiple-choice, true/false).
+1. **Enum Usage: Categories**, difficulty levels, and question types are implemented as enums, providing a structured approach to classification.
+1. **Concurrency Control**: RowVersion property in the Question model helps manage concurrent edits.
+1. **Session Management**: Quiz scores are stored in session to persist across requests.
+1. **Dynamic Form Handling**: JavaScript is used to dynamically add or remove answer options based on the question type.
+1. **API Integration**: A RESTful API (QuestionController) is included for potential future expansions or integrations.
+
 ### Wireframes
-You can download the wireframes for this website from this link []().
+You view the wireframes for this Application here.
+
 <details>
+    
 <summary>Wireframes Board</summary>
+![Index Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247363/GroupQuiz/index_vuqnts.png)
+![Quiz Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/quiz_vhg7rl.png)
+![Result Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247363/GroupQuiz/result_bl4kix.png)
+![Dashboard Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/Dashboard1_o2ee1l.png)
+![Create Page](https://res.cloudinary.com/dlulkctls/image/upload/v1719247362/GroupQuiz/edit_rh3vsq.png)
 </details> 
 
 ---
@@ -241,6 +277,8 @@ dotnet run
 * [Microsoft Documentation](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
 * [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 * [W3school Resouces](https://www.w3schools.com/)
+* [Stack OverFlow](https://stackoverflow.com/)
+* [YouTube Tutorial and Learning Material](https://www.youtube.com/)
 
 
 [Back to Table of Contents ⇧](#table-of-contents)
