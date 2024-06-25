@@ -256,8 +256,6 @@ Form validation is implemented to ensure the integrity and correctness of data e
 ### Unit Testing
 Unit tests were implemented using xUnit for critical components of the application:
 
-1. **QuestionControllerTests**: Tests CRUD operations in the QuestionController.
-1. **QuizLogicTests**: Verifies the scoring and progression logic of the quiz.
 1. **ModelValidationTests**: Ensures that model validation rules are working correctly.
 
 [Back to Table of Contents ⇧](#table-of-contents)
