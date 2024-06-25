@@ -8,35 +8,35 @@ using System.Linq;
 
 namespace Group_Quiz.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    [ApiController]// api controller
+    [Route("api/[controller]")]//set base route to api/question
     public class QuestionController : ControllerBase
     {
         private readonly QuizDbContext _context;
 
-        public QuestionController(QuizDbContext context)
+        public QuestionController(QuizDbContext context)//constructor
         {
             _context = context;
         }
 
         //To GET: api/questions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()// retrieve all questons
         {
-            return await _context.Questions.Include(q => q.Answers).ToListAsync();
+            return await _context.Questions.Include(q => q.Answers).ToListAsync();// Retrieves questions with their answers frm the DB
         }
 
         //GET api/questions/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Question>> GetQuestion(int id)
+        public async Task<ActionResult<Question>> GetQuestion(int id)// get question based on id: is route parameter
         {
             var question = await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(q => q.QuestionId == id);
 
             if (question == null)
             {
-                return NotFound();
+                return NotFound();//404
             }
-            return question;
+            return question;// reurn question
         
         }
 

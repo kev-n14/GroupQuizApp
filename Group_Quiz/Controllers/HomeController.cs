@@ -99,17 +99,17 @@ namespace Group_Quiz.Controllers
         [HttpPost]
         public IActionResult SaveEdit(Question question)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)// checks submitted form data is valid
             {
                 try
                 {
                     var existingQuestion = _context.Questions
                         .Include(q => q.Answers)
-                        .FirstOrDefault(q => q.QuestionId == question.QuestionId);
+                        .FirstOrDefault(q => q.QuestionId == question.QuestionId);// Retrieves questions with their answers frm the DB
 
                     if (existingQuestion == null)
                     {
-                        return NotFound();
+                        return NotFound();//404
                     }
 
                     _context.Entry(existingQuestion).CurrentValues.SetValues(question);//updats question properties
@@ -118,7 +118,7 @@ namespace Group_Quiz.Controllers
                     foreach (var answer in question.Answers)
                     {
                         var existingAnswer = existingQuestion.Answers
-                            .FirstOrDefault(a => a.AnswerId == answer.AnswerId);
+                            .FirstOrDefault(a => a.AnswerId == answer.AnswerId);// Retrieves questions with their answers frm the DB
 
                         if (existingAnswer != null)
                         {
@@ -142,11 +142,11 @@ namespace Group_Quiz.Controllers
                     _context.SaveChanges();//save
                     return RedirectToAction("Dashboard");//redirect dashboard action
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException)//catch concurrency exceptions
                 {
                     if (!QuestionExists(question.QuestionId))
                     {
-                        return NotFound();
+                        return NotFound();//404
                     }
                     else
                     {
@@ -196,13 +196,13 @@ namespace Group_Quiz.Controllers
         [HttpPost]
         public async Task<IActionResult> NextQuestion(int questionId, int currentIndex, int selectedAnswerId)
         {
-            var question = await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(q => q.QuestionId == questionId);
+            var question = await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(q => q.QuestionId == questionId);//retrieve current Q and associated answers
             if (question == null)
             {
-                return NotFound();
+                return NotFound();//404 
             }
 
-            var selectedAnswer = question.Answers.FirstOrDefault(a => a.AnswerId == selectedAnswerId);
+            var selectedAnswer = question.Answers.FirstOrDefault(a => a.AnswerId == selectedAnswerId);//user answer from list of answers
             if (selectedAnswer != null && selectedAnswer.IsCorrect)
             {
                 // Increase score
@@ -210,7 +210,7 @@ namespace Group_Quiz.Controllers
                 HttpContext.Session.SetInt32(ScoreKey, currentScore + question.Points);// Increases the score if the selected answer is correct.
             }
 
-            var questions = await _context.Questions.ToListAsync();
+            var questions = await _context.Questions.ToListAsync();//retrieve all questions frm db
             if (currentIndex < questions.Count - 1)
             {
                 return RedirectToAction("Quiz", new { id = questions[currentIndex + 1].QuestionId, currentIndex = currentIndex + 1 });// Redirects to the next question.

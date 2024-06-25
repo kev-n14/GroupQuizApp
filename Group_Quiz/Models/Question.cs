@@ -70,7 +70,9 @@ namespace Group_Quiz.Models
         [StringLength(100, MinimumLength = 1)]
         public string Text { get; set; }
         public bool IsCorrect { get; set; }
+       
         
+
     }
     public class ResultViewModel
     {

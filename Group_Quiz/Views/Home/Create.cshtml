@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1 class="text-center">@ViewData["Title"] New Question</h1>
-<!--from this point-->
 <div class="container mt-5">
     
 
@@ -67,7 +66,7 @@
 </div>
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () { // add eventlistener to page loaded
             const answersContainer = document.getElementById('answers-container');
             const addAnswerButton = document.querySelector('.btn-add-answer');
             const questionTypeSelect = document.getElementById('question-type');
@@ -102,15 +101,15 @@
                         </div>
                     </div>
                 `;
-                answersContainer.appendChild(answerItem);
+                answersContainer.appendChild(answerItem);//adds new answer item when button clicked
                 answerIndex++;
                 updateAddAnswerButton();
             });
 
-            answersContainer.addEventListener('click', function (e) {
+            answersContainer.addEventListener('click', function (e) { //removal of answer, cloest parent
                 if (e.target.classList.contains('btn-remove-answer')) {
                     e.target.closest('.answer-item').remove();
-                    updateAddAnswerButton();
+                    updateAddAnswerButton();//update
                 }
             });
 

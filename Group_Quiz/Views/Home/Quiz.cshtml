@@ -11,8 +11,17 @@
             var currentIndex = (int)ViewData["CurrentQuestionIndex"];
             var question = Model;
             <div class="question-card">
-                <div class="text-center mb-4">
-                    <p>Question: @(currentIndex + 1) of @questions.Count</p>
+                <div class=" mb-4 d-flex justify-content-between">
+                    
+                    <div>
+                    <p>Difficulty: @question.Difficulty</p>
+                    </div>
+                    <div>
+                        <p>Question: @(currentIndex + 1) of @questions.Count</p>
+                    </div>
+                    <div>
+                        <p>QP: @question.Points</p>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <h3 class="text-center">@question.QuestionText</h3>
@@ -62,10 +71,10 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
-            const answerCards = document.querySelectorAll('.answer-options .card');
+            const answerCards = document.querySelectorAll('.answer-options .card');//decendeants answer-options nodelist
             answerCards.forEach(card => {
-                card.addEventListener('click', function () {
-                    const radio = this.querySelector('input[type="radio"]');
+                card.addEventListener('click', function () {//add click function to each card
+                    const radio = this.querySelector('input[type="radio"]');// this->card clicked
                     radio.checked = true;
                 });
             });
